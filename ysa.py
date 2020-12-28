@@ -1,10 +1,10 @@
-# kutuphaneler
+kutuphaneler
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
 import csv
-# import re
+import re
 
 from keras.models import Sequential
 from keras.layers import Dense,Activation
@@ -88,15 +88,26 @@ np.random.seed(seed)
 # veri yukleme
 veriler = pd.read_csv('kc_house_data.csv') #train
 
-# veriler.info()
-# id ve price sütunu ayrılıp dataset eğitime hazır hale getirilmiştir
+veriler.info()
+id ve price sütunu ayrılıp dataset eğitime hazır hale getirilmiştir
 df_price=veriler.iloc[:,2:3]
 df_date=veriler.iloc[:,1:2]
 df_other_columns=veriler.iloc[:,3:]
 df_train=pd.concat([df_date,df_other_columns],axis=1) #preprocess
 Price_values=df_price.values
 train_values=df_train.values
-
+date sütununu ayı yıl gün olarak bölme
+veriler['date']=pd.to_datetime(veriler['date'])
+veriler['month']=veriler['date'].dt.month
+veriler['year']=veriler['date'].dt.year
+veriler['day']=veriler['date'].dt.day
+deneme=veriler.drop(columns=['date','id'])
+veriler['month'] = data['Date.of.Birth'].dt.month
+data[['Date.of.Birth','month']].head()
+data['day'] = data['Date.of.Birth'].dt.day
+data[['Date.of.Birth','day']].head()
+data['year'] = data['Date.of.Birth'].dt.year
+data[['Date.of.Birth','year']].head()
 
 
 num_epochs = 100
